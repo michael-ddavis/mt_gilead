@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "229456628302",
+    "firebase_url": "https://mt-gilead-flutter.firebaseio.com",
+    "project_id": "mt-gilead-flutter",
+    "storage_bucket": "mt-gilead-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:229456628302:android:34d5df288e582c6c",
+        "android_client_info": {
+          "package_name": "kingdomcreationz.com.mt_gilead"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "229456628302-tv9cdcobbptn4q4a533d9vh5l1fprhui.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kingdomcreationz.com.mt_gilead",
+            "certificate_hash": "6e231361f53bff66522d710b6b2e9ed261ec075e"
+          }
+        },
+        {
+          "client_id": "229456628302-80e17rsropi1h18er2sa0mdkrunrfsgt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMulbR2CTDjD4NbzIVFaWo-15MmqSh-WA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "229456628302-80e17rsropi1h18er2sa0mdkrunrfsgt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "229456628302-9ndh2af8r14rfk1bfgdqfm14t1sdrrl6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "kingdomcreationz.com.mtGilead"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
