@@ -28,7 +28,9 @@ end
 
 target 'Runner' do
   use_frameworks!
-
+  pod 'FirebaseCore', '~> 6.0.0'
+  pod 'FirebaseAuth', '~> 6.0.0'
+  pod 'FirebaseFirestore', '~> 1.3.0'
   # Prepare symlinks folder. We use symlinks to avoid having Podfile.lock
   # referring to absolute paths on developers' machines.
   system('rm -rf Pods/.symlinks')
@@ -63,3 +65,4 @@ post_install do |installer|
     end
   end
 end
+

@@ -141,6 +141,9 @@ DEPENDENCIES:
   - firebase_auth (from `Pods/.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `Pods/.symlinks/plugins/firebase_core/ios`)
   - firebase_storage (from `Pods/.symlinks/plugins/firebase_storage/ios`)
+  - FirebaseAuth (~> 6.0.0)
+  - FirebaseCore (~> 6.0.0)
+  - FirebaseFirestore (~> 1.3.0)
   - Flutter (from `Pods/.symlinks/flutter/ios`)
   - shared_preferences (from `Pods/.symlinks/plugins/shared_preferences/ios`)
 
@@ -205,6 +208,6 @@ SPEC CHECKSUMS:
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
   shared_preferences: 5a1d487c427ee18fcd3ea1f2a131569481834b53
 
-PODFILE CHECKSUM: 8e313a2c02406808061b90670d33ba78f9fe2930
+PODFILE CHECKSUM: 756b06ebd0be26e12e884262d8d4893a0cdaf9c2
 
 COCOAPODS: 1.5.3
