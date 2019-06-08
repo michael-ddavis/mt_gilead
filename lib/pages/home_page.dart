@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mt_gilead/models/state.dart';
-import 'package:mt_gilead/pages/logout_page.dart';
-import 'package:mt_gilead/pages/signin_page.dart';
-import 'package:mt_gilead/pages/store_page.dart';
+import 'package:mt_gilead/pages/login/logout_page.dart';
+import 'package:mt_gilead/pages/login/signin_page.dart';
+import 'package:mt_gilead/pages/store/store_page.dart';
 import 'package:mt_gilead/utils/loading.dart';
 import 'package:mt_gilead/utils/state_widget.dart';
 
@@ -27,7 +27,6 @@ class HomePageState extends State<HomePage> {
   final List<Widget> _pages = [
     LogoutPage(),
     StorePage(),
-    //ProductList(),
   ];
 
   @override
@@ -129,7 +128,9 @@ class HomePageState extends State<HomePage> {
               break;
             case 1:
               return CupertinoTabView(
-                builder: (BuildContext context) => StorePage(),
+                builder: (BuildContext context) =>
+                    StorePage(appState:
+                    appState),
                 defaultTitle: "Store",
               );
               break;

@@ -1,6 +1,7 @@
 //library modal_progress_hud;
 
 import 'package:flutter/material.dart';
+import 'package:mt_gilead/utils/Palatte.dart';
 
 ///
 /// Wrap around any widget that makes an async call to show a modal progress
@@ -36,7 +37,8 @@ class LoadingScreen extends StatelessWidget {
     @required this.inAsyncCall,
     this.opacity = 0.7,
     this.color = Colors.white,
-    this.progressIndicator = const CircularProgressIndicator(),
+    this.progressIndicator =
+    const CircularProgressIndicator(backgroundColor: Colors.amber),
     this.offset,
     this.dismissible = false,
     @required this.child,
@@ -56,14 +58,16 @@ class LoadingScreen extends StatelessWidget {
                 height: 60,
                 width: 60,
                 decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
+                  color: Palatte.primaryColor,
                   shape: BoxShape.circle,
                 ),
                 //need this due to bug...https://github.com/flutter/flutter/issues/18399
                 child: Align(
                   alignment: Alignment.center,
                   child: SizedBox(
-                    child: CircularProgressIndicator(),
+                    child: CircularProgressIndicator(
+                      backgroundColor: Colors.amber,
+                    ),
                     height: 30.0,
                     width: 30.0,
                   ),

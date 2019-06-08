@@ -2,7 +2,7 @@ class Validator {
   static String validateEmail(String value) {
     Pattern pattern = r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+';
     RegExp regex = new RegExp(pattern);
-    if (!regex.hasMatch(value))
+    if (!regex.hasMatch(value.trim()))
       return 'Please enter a valid email address.';
     else
       return null;

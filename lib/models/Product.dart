@@ -1,27 +1,26 @@
-
 class Product {
-  final String id;
-  final String image;
+  final String documentId;
   final String title;
-  final String date;
-  final String price;
   final String description;
-
-  const Product(
-      {this.id,
-      this.image,
-      this.title,
-      this.date,
-      this.price,
-      this.description,});
+  final String image;
+  final String price;
+  final List<dynamic> format;
+  final List<dynamic> favorites;
+  final String type;
+  
+  Product({this.documentId, this.title, this.description, this.image, this
+      .price,
+    this.format, this.favorites, this.type});
 
   Product.fromMap(Map<String, dynamic> data, String id)
       : this(
-          id: id,
-          image: data['image'],
-          title: data['title'],
-          date: data['date'],
-          price: data['price'],
-          description: data['description'],
-        );
+    documentId: id,
+    title: data['title'],
+    description: data['description'],
+    image: data['image'],
+    price: data['price'],
+    format: data['format'],
+    favorites: data['favorites'],
+    type: data['type'],
+  );
 }

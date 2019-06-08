@@ -1,17 +1,28 @@
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mt_gilead/models/Product.dart';
 import 'package:mt_gilead/models/state.dart';
-import 'package:mt_gilead/pages/store/widgets/ProductPriceAreaWidget.dart';
+import 'package:mt_gilead/pages/store/widgets/ProductPriceArea.dart';
+import 'package:mt_gilead/pages/store/widgets/productdetail'
+    '/ProductDetailDescription.dart';
+import 'package:mt_gilead/pages/store/widgets/productdetail'
+    '/ProductDetailImage.dart';
+import 'package:mt_gilead/pages/store/widgets/productdetail'
+    '/ProductDetailTitle.dart';
+import 'package:mt_gilead/pages/store/widgets/relatedproducts/RelatedProduct.dart';
+import 'package:mt_gilead/utils/Constants.dart';
 import 'package:mt_gilead/utils/Palatte.dart';
 import 'package:mt_gilead/utils/UIData.dart';
 import 'package:mt_gilead/utils/state_widget.dart';
 
 class ProductDetail extends StatefulWidget {
   final Product product;
-
+  
   ProductDetail({Key key, @required this.product}) : super(key: key);
-
+  
   @override
   _ProductDetailState createState() => _ProductDetailState(product);
 }
@@ -20,18 +31,18 @@ class _ProductDetailState extends State<ProductDetail> {
   Product product;
   StateModel appState;
   List favorites;
-
+  
   _ProductDetailState(this.product);
-
+  
   @override
   void initState() {
     super.initState();
   }
-
+  
   @override
   Widget build(BuildContext context) {
     Widget platformUI;
-
+    
     switch (Theme.of(context).platform) {
       case TargetPlatform.android:
         return _androidProductDetailPage();
@@ -45,30 +56,40 @@ class _ProductDetailState extends State<ProductDetail> {
     }
     return platformUI;
   }
-
+  
   ///////////////////////////Navigation/////////////////////////////////////////
-
+  
   _productDetailNavigationBarAndroid() {
     return AppBar(
-      backgroundColor: Palatte.white,
+      backgroundColor: Colors.white,
       centerTitle: true,
+      elevation: 1.0,
       title: Text(
-        'Product Detail',
-        style: baseTextStyle,
+        product.title,
+        style: baseToolbarStyle,
+      ),
+      leading: IconButton(
+        icon: Icon(Icons.arrow_back),
+        color: Colors.black,
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
       ),
     );
   }
-
+  
   _productDetailNavigationBarIOS() {
     return CupertinoNavigationBar(
       backgroundColor: Palatte.iOSWhite,
       middle: Text(
-        "Product Detail",
+        product.title,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
         style: baseToolbarStyle,
       ),
     );
   }
-
+  
   _buildDivider(Size screenSize) {
     return Column(
       children: <Widget>[
@@ -83,137 +104,130 @@ class _ProductDetailState extends State<ProductDetail> {
       ],
     );
   }
-
-  _buildProductImagesWidgets() {
-    double screenWidth = MediaQuery.of(context).size.width;
-    return Container(
-      height: 350.0,
-      width: screenWidth - 75.0,
-      margin: EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
-      decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey,
-              blurRadius: 10.0, // has the effect of softening the shadow
-              spreadRadius: .5, // has the effect of extending the shadow
-              offset: Offset(
-                2.0, // horizontal, move right 10
-                2.0, // vertical, move down 10
-              ),
-            )
-          ],
-          borderRadius: BorderRadius.circular(10.0),
-          image: DecorationImage(
-            image: NetworkImage(product.image),
-            fit: BoxFit.cover,
-          )),
-    );
-  }
-
-  _buildProductTitleWidget() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        Container(
-          padding: EdgeInsets.only(left: 16.0, top: 16.0),
-          child: Text(
-            widget.product.title,
-            style: productTitleTextStyle,
-          ),
-        ),
-      ],
-    );
-  }
-
-  _buildDescription() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Container(
-            padding: EdgeInsets.only(left: 16.0, right: 16.0),
-            child: Text(
-              widget.product.description,
-              style: productDescTextStyle,
-              textAlign: TextAlign.start,
-            ))
-      ],
-    );
-  }
   
   /*
    ///////////////////////////Related Products Section//////////////////////////
   */
-
-//  _relatedProducts() {
-//    return Column(
-//      children: <Widget>[
-//        Container(
-//          padding: EdgeInsets.only(left: 16.0, bottom: 8.0),
-//          child: Text(
-//            "Related Products",
-//            style: productDescriptionTitleTextStyle,
-//          ),
-//        ),
-//        makeProductList(),
-//      ],
-//    );
-//  }
-
-  // Related Product List
-//  Container makeProductList() => Container(
-//        height: 175.0,
-//        padding: EdgeInsets.only(top: 4.0),
-//        child: ScrollConfiguration(
-//          behavior: ScrollBehavior(),
-//          child: ListView.builder(
-//            shrinkWrap: true,
-//            scrollDirection: Axis.horizontal,
-//            itemCount: productCards.length,
-//            itemBuilder: (BuildContext context, int index) {
-//              return InkWell(
-//                child: RelatedProductCard(product: productCards[index]),
-//                onTap: () {
-//                  Navigator.push(
-//                    context,
-//                    CupertinoPageRoute(
-//                      builder: (context) =>
-//                          ProductDetail(product: productCards[index]),
-//                    ),
-//                  );
-//                },
-//              );
-//            },
-//          ),
-//        ),
-//      );
-
+  
+  Center _buildLoadingIndicator() {
+    return Center(
+      child: CircularProgressIndicator(),
+    );
+  }
+  
+  _relatedProducts() {
+    return Column(
+      children: <Widget>[
+        Container(
+          padding: EdgeInsets.only(left: 16.0, bottom: 8.0),
+          child: Text(
+            "Related Products",
+            style: productDescriptionTitleTextStyle,
+          ),
+        ),
+        _makeProductList(),
+      ],
+    );
+  }
+  
+  //Related Product List
+  _makeProductList() {
+    CollectionReference collectionReference = Firestore.instance
+        .collection(Constants.PRODUCTS)
+        .document(product.documentId)
+        .collection(Constants.RELATED_PRODUCTS);
+    Stream<QuerySnapshot> stream;
+    stream = collectionReference.snapshots();
+    return Container(
+      height: 250.0,
+      padding: EdgeInsets.only(top: 4.0),
+      child: ScrollConfiguration(
+        behavior: ScrollBehavior(),
+        child: StreamBuilder<QuerySnapshot>(
+            stream: stream,
+            builder:
+                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (snapshot.hasError) return Text('Error: ${snapshot.error}');
+              switch (snapshot.connectionState) {
+                case ConnectionState.waiting:
+                  return _buildLoadingIndicator();
+                  break;
+                default:
+                  return ListView(
+                    shrinkWrap: true,
+                    padding:
+                    EdgeInsets.symmetric(vertical: 8.0, horizontal: 0.0),
+                    controller: ScrollController(),
+                    scrollDirection: Axis.horizontal,
+                    children: snapshot.data.documents
+                        .map((DocumentSnapshot document) {
+                      return GestureDetector(
+                        child: RelatedProduct(
+                            product: Product.fromMap(
+                                document.data, document.documentID)),
+                        onTap: () {
+                          if (Platform.isIOS) {
+                            Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                builder: (context) =>
+                                    ProductDetail(
+                                        product: Product.fromMap(
+                                            document.data,
+                                            document.documentID)),
+                              ),
+                            );
+                          } else {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    ProductDetail(
+                                        product: Product.fromMap(
+                                            document.data,
+                                            document.documentID)),
+                              ),
+                            );
+                          }
+                        },
+                      );
+                    }).toList(),
+                  );
+                  break;
+              }
+            }),
+      ),
+    );
+  }
+  
   _productDetailPage() {
     Size screenSize = MediaQuery.of(context).size;
     StateModel appState = StateWidget.of(context).state;
     return ListView(
       children: <Widget>[
-        _buildProductImagesWidgets(),
+        ProductDetailImage(product: product),
         SizedBox(height: 24.0),
-        _buildProductTitleWidget(),
+        ProductDetailTitle(product: product),
         SizedBox(height: 24.0),
-        _buildDescription(),
+        ProductDetailDescription(product: product),
         SizedBox(height: 24.0),
-        ProductPriceArea(product: product, appState: appState),
+        ProductPriceArea(
+            product: product, appState: appState, id: product.documentId),
         SizedBox(height: 24.0),
         _buildDivider(screenSize),
         SizedBox(height: 24.0),
-        //_relatedProducts(),
+        _relatedProducts(),
       ],
     );
   }
-
+  
   _androidProductDetailPage() {
     return Scaffold(
       appBar: _productDetailNavigationBarAndroid(),
       body: _productDetailPage(),
     );
   }
-
+  
   _iOSProductDetailPage() {
     return CupertinoPageScaffold(
       navigationBar: _productDetailNavigationBarIOS(),

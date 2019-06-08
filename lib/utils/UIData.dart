@@ -4,10 +4,28 @@ final baseTextStyle =
     const TextStyle(color: Colors.white, fontFamily: 'Roboto');
 
 final baseToolbarStyle =
-    const TextStyle(color: Colors.black, fontFamily: 'Roboto');
+const TextStyle(color: Colors.black, fontFamily: 'Roboto', fontSize: 16.0);
 
 final productTitleTextStyle = baseTextStyle.copyWith(
     fontSize: 28.0, fontWeight: FontWeight.bold, color: Colors.black);
+
+final messageTitleTextStyleSmall = baseTextStyle.copyWith(
+    fontSize: 20.0, fontWeight: FontWeight.w600, color: Colors.black);
+
+final messageTitleTextStyleLarge = baseTextStyle.copyWith(
+    fontSize: 28.0, fontWeight: FontWeight.w600, color: Colors.black);
+
+final messageDescriptionTextStyleSmall = baseTextStyle.copyWith(
+    fontSize: 14.0,
+    fontWeight: FontWeight.w500,
+    color: Colors.black54,
+    height: 1.5);
+
+final messageDescriptionTextStyleLarge = baseTextStyle.copyWith(
+    fontSize: 18.0,
+    fontWeight: FontWeight.w500,
+    color: Colors.black54,
+    height: 1.5);
 
 final shoppingCartCardTitle = baseTextStyle.copyWith(
     fontSize: 18.0, fontWeight: FontWeight.w500, color: Colors.black);
@@ -16,13 +34,19 @@ final shoppingCartCardDate = baseTextStyle.copyWith(
     fontSize: 14.0, fontWeight: FontWeight.w500, color: Colors.black);
 
 final shoppingCartCardPrice = baseTextStyle.copyWith(
-    fontSize: 24.0,
+    fontSize: 16.0,
     fontWeight: FontWeight.w200,
     color: Colors.black,
     fontFamily: 'Trebuchet');
 
+final shoppingCartCardQuantity = baseTextStyle.copyWith(
+    fontSize: 14.0,
+    fontWeight: FontWeight.w300,
+    color: Colors.black,
+    fontFamily: 'Trebuchet');
+
 final productSubTitleTextStyle = baseTextStyle.copyWith(
-    fontSize: 12.0, fontWeight: FontWeight.bold, color: Colors.black);
+    fontSize: 14.0, fontWeight: FontWeight.bold, color: Colors.black);
 
 final productDescriptionTitleTextStyle = baseTextStyle.copyWith(
     fontSize: 16.0, fontWeight: FontWeight.w500, color: Colors.black);
@@ -42,9 +66,10 @@ final productLatestSermonDateStyle =
     baseTextStyle.copyWith(fontSize: 14.0, fontWeight: FontWeight.w300);
 
 final productSermonTitleStyle =
-    baseTextStyle.copyWith(fontSize: 16.0, color: Colors.black);
+baseTextStyle.copyWith(fontSize: 14.0, color: Colors.black);
 
-final relatedProductTitle = baseTextStyle.copyWith(fontSize: 16.0);
+final relatedProductTitle =
+baseTextStyle.copyWith(fontSize: 14.0, color: Colors.black);
 
 final relatedProductDate = baseTextStyle.copyWith(
     fontSize: 16.0, fontWeight: FontWeight.w700, color: Colors.black);
@@ -56,7 +81,7 @@ final tagStyle =
     baseTextStyle.copyWith(fontSize: 10.0, fontWeight: FontWeight.w400);
 
 final productSermonDateStyle = baseTextStyle.copyWith(
-    fontSize: 12.0, fontWeight: FontWeight.w300, color: Colors.black);
+    fontSize: 10.0, fontWeight: FontWeight.w300, color: Colors.black);
 
 final productDescTextStyle = baseTextStyle.copyWith(
     fontSize: 15.0,
@@ -74,17 +99,8 @@ List<T> map<T>(List list, Function handler) {
   return result;
 }
 
-final List carouselImages = [
-  'assets/images/i.jpg',
-  'assets/images/j.jpg',
-  'assets/images/l.jpg',
-  'assets/images/k.jpg'
-];
-
 final List shoppingCartList = [];
 final List favoritesList = [];
-
-
 
 class MyBehavior extends ScrollBehavior {
   @override

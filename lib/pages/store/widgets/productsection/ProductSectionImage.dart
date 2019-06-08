@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:mt_gilead/models/Product.dart';
+import 'package:mt_gilead/models/ProductCategory.dart';
 
 class ProductSectionImage extends StatelessWidget {
-  final Product product;
+  final ProductCategory productCategory;
   final double imageSize;
-
-  ProductSectionImage({Key key, this.product, this.imageSize}) : super(key:key);
+  
+  ProductSectionImage({Key key, this.productCategory, this.imageSize})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 250.0,
-      width: 190.0,
-      child: Image(
-        image: NetworkImage(product.image),
-        fit: BoxFit.cover,
-      ),
-    );
+        height: 250.0,
+        width: 200.0,
+        child: FadeInImage.assetNetwork(
+            fit: BoxFit.fitHeight,
+            placeholder: "assets/images/placeholder.png",
+            image: productCategory.image));
   }
 }
